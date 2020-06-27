@@ -1,8 +1,8 @@
 %global tarName atomicwrites
 
 Name:           python-%{tarName}
-Version:        1.3.0
-Release:        2
+Version:        1.4.0
+Release:        1
 Summary:        Atomic wrties with race-free assertion that the target file doesn’t yet exist.
 
 Group:          Development/Python
@@ -10,7 +10,7 @@ License:        BSD
 URL:            https://github.com/untitaker/python-atomicwrites
 Source0:        https://github.com/untitaker/python-atomicwrites/archive/python-%{tarName}-%{version}.tar.gz
 BuildArch:      noarch
-BuildRequires:  python3-devel
+BuildRequires:  python-devel
 BuildRequires:	python-setuptools
 BuildRequires:	python2-devel
 BuildRequires:	python2-setuptools
