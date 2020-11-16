@@ -2,7 +2,7 @@
 
 Name:           python-%{tarName}
 Version:        1.4.0
-Release:        1
+Release:        2
 Summary:        Atomic wrties with race-free assertion that the target file doesn’t yet exist.
 
 Group:          Development/Python
