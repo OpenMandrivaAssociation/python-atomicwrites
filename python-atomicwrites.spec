@@ -1,19 +1,24 @@
-%global tarName atomicwrites
+%global module atomicwrites
 
-Name:           python-%{tarName}
+%bcond_without python2
+
+Name:           python-%{module}
 Version:        1.4.0
-Release:        2
+Release:        3
 Summary:        Atomic wrties with race-free assertion that the target file doesn’t yet exist.
 
 Group:          Development/Python
 License:        BSD
 URL:            https://github.com/untitaker/python-atomicwrites
-Source0:        https://github.com/untitaker/python-atomicwrites/archive/python-%{tarName}-%{version}.tar.gz
+Source0:		https://github.com/untitaker/python-atomicwrites/archive/refs/tags/%{version}/python-%{module}-%{version}.tar.gz
 BuildArch:      noarch
-BuildRequires:  python-devel
-BuildRequires:	python-setuptools
-BuildRequires:	python2-devel
+BuildRequires:	pkgconfig(python3)
+BuildRequires:	python3dist(setuptools)
+
+%if %{with python2}
+BuildRequires:	pkgconfig(python2)
 BuildRequires:	python2-setuptools
+%endif
 
 %description
 Atomic wrties with race-free assertion that the target file doesn’t yet exist. 
@@ -21,35 +26,53 @@ This can be controlled with the overwrite parameter.
 Offer imple high-level API that wraps a very flexible class-based API
 with Consistent error handling across platforms.
 
-%package -n python2-%{tarName}
+%files
+%license LICENSE
+%doc CONTRIBUTING.rst README.rst
+%{python_sitelib}/%{module}/
+%{python_sitelib}/%{module}-%{version}-py%{pyver}.egg-info/
 
+#----------------------------------------------------------------------------
+
+%if %{with python2}
+%package -n python2-%{module}
 Summary:        Atomic wrties with race-free assertion that the target file doesn’t yet exist.
-%description -n python2-%{tarName}
+
+%description -n python2-%{module}
 Atomic wrties with race-free assertion that the target file doesn’t yet exist. 
 This can be controlled with the overwrite parameter.
 Offer imple high-level API that wraps a very flexible class-based API
 with Consistent error handling across platforms.
 
+%files -n python2-%{module}
+%license LICENSE
+%doc CONTRIBUTING.rst README.rst
+%{python2_sitelib}/%{module}/
+%{python2_sitelib}/%{module}-%{version}-py%{py2ver}.egg-info/
+%endif
+
+#----------------------------------------------------------------------------
+
 %prep
-%setup -qn python-%{tarName}-%{version}
+%setup -qn python-%{module}-%{version}
 
+%if %{with python2}
 cp -a . %py2dir
-%build
-python setup.py build
+%endif
 
+%build
+%py_build
+
+%if %{with python2}
 pushd %py2dir
-python2 setup.py build
+%py2_build
+%endif
 
 %install
-python setup.py install --root=%{buildroot}
+%py_install
 
+%if %{with python2}
 pushd %py2dir
-python2 setup.py install --root=%{buildroot}
+%py2_install
+%endif
 
-%files
-%{py_puresitedir}/*/*
-%doc CONTRIBUTING.rst README.rst LICENSE
-
-%files -n python2-%{tarName}
-%{py2_puresitedir}/*/*
-%doc CONTRIBUTING.rst README.rst LICENSE
