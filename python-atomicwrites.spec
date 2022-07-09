@@ -3,8 +3,8 @@
 %bcond_without python2
 
 Name:           python-%{module}
-Version:        1.4.0
-Release:        3
+Version:	1.4.1
+Release:	1
 Summary:        Atomic wrties with race-free assertion that the target file doesn’t yet exist.
 
 Group:          Development/Python
