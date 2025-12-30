@@ -4,7 +4,7 @@
 
 Name:           python-%{module}
 Version:	1.4.1
-Release:	3
+Release:	4
 Summary:        Atomic wrties with race-free assertion that the target file doesn’t yet exist.
 
 Group:          Development/Python
