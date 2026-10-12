@@ -2,7 +2,7 @@
 
 Name:		python-atomicwrites
 Version:	1.4.1
-Release:	2
+Release:	3
 Summary:	Atomic wrties with race-free assertion that the target file doesn’t yet exist.
 Group:		Development/Python
 License:	BSD
